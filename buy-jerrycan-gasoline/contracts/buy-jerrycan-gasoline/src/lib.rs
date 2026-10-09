@@ -522,7 +522,7 @@ impl BuyGasolineJerrycan {
 
     // ======================= Vehiculos =======================
 
-    /// Registra el vehiculo. `register_by` (equivalente a `msg.sender`) debe firmar.
+    /// Registra el vehiculo. `register_by`, debe firmar.
     pub fn register_vehicle(
         env: Env,
         register_by: Address,
@@ -598,7 +598,7 @@ impl BuyGasolineJerrycan {
 
     // ======================= Compradores =======================
 
-    /// Registra un comprador. `register_by` (equivalente a `msg.sender`) debe firmar.
+    /// Registra un comprador. `register_by`, debe firmar.
     pub fn register_buyer(
         env: Env,
         register_by: Address,
