@@ -285,3 +285,31 @@ stellar contract deploy \
 CC7XIIG5OXBLTKKN455XNWV4IAR6FD6P2GW3VXJQQO5BVSXAVGXF5LHL
 
 ```
+
+## Registra vehiculo
+
+Para registrar el vehiculo correr:
+
+```bash
+stellar contract invoke \
+  --id $CONTRATO \
+  --source-account juanjo \
+  --network testnet \
+  -- register_vehicle \
+  --register_by $WALLET \
+  --plate "P123" \
+  --brand "Suzuki" \
+  --model "Grand Vitara" \
+  --year 2020 \
+  --color "NEGRO" 
+
+⚠️ A new release of Stellar CLI is available: 27.1.0 -> 28.1.0
+ℹ️ Simulating transaction…
+ℹ️ Signing transaction: a49cfbd784bcb5e0ea17521fb9cee06655908ca218085eb1646f906b5710f3f2
+🌎 Sending transaction…
+✅ Transaction submitted successfully!
+🔗 https://stellar.expert/explorer/testnet/tx/a49cfbd784bcb5e0ea17521fb9cee06655908ca218085eb1646f906b5710f3f2
+📅 CC7XIIG5OXBLTKKN455XNWV4IAR6FD6P2GW3VXJQQO5BVSXAVGXF5LHL - Success - Event: EvtRegisterVehicle (evt_register_vehicle), plate: "P123", id: 1, register_by: "GCA7QQ6FRH5AN4RCGIUU7WWBFM4RCLFKZK55K7BUCWNHOL4AA6NXTLUH", brand: "Suzuki", model: "Grand Vitara", year: 2020, color: "NEGRO", state: 1
+true
+
+```
