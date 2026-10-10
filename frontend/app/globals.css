@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* SE ADICIONA */
+
+/* app/vehiculo/vehiculo.css */
+.formContainer {
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+}
+
+.titulo {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputField {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #ffffff; /* Fondo blanco requerido */
+  color: #000000;            /* Texto negro */
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchGroup {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.btnSubmit {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #16a34a;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnSearch {
+  padding: 12px 24px;
+  border-radius: 6px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.alertExito {
+  padding: 16px;
+  background-color: #def7ec;
+  color: #03543f;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.alertError {
+  padding: 16px;
+  background-color: #fde8e8;
+  color: #9b1c1c;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.resultadoBox {
+  padding: 24px;
+  background-color: #1e293b;
+  border-radius: 8px;
+  color: #f8fafc;
+  margin-top: 20px;
+}
+
+
+/* Para actualizar */
+.selectField {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btnUpdate {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #d97706; /* Color ámbar/naranja para actualizar */
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
