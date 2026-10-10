@@ -1,0 +1,21 @@
+.selectField {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btnUpdate {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #d97706; /* Color ámbar/naranja para actualizar */
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
