@@ -1,6 +1,6 @@
 import * as Gasolina from 'buy-jerrycan-gasoline';
 import type { contract } from 'buy-jerrycan-gasoline';
-import { isConnected, requestAccess, getNetworkDetails, signTransaction } from '@stellar/freighter-api';
+import { isConnected, requestAccess, getNetworkDetails, signTransaction, signAuthEntry } from '@stellar/freighter-api';
 
 // Red y contrato: se leen de .env.local; si faltan, se usan los valores
 // embebidos en el binding (generado con --network testnet).
@@ -79,6 +79,59 @@ export async function obtenerContratoDeEscritura() {
   });
 
   return { contrato, direccion };
+}
+
+/**
+ * Firma con Freighter una autorización (auth entry) de una cuenta que no es la
+ * que envía la transacción. Ej: set_admin requiere también la firma del nuevo admin.
+ * Uso: await tx.signAuthEntries({ address, signAuthEntry: firmaDeAutorizacion(address) })
+ */
+export function firmaDeAutorizacion(direccion: string) {
+  return async (entrada: string) => {
+    const firmada = await signAuthEntry(entrada, { networkPassphrase: RED.networkPassphrase, address: direccion });
+    if (firmada.error) throw new Error(firmada.error.message);
+    if (!firmada.signedAuthEntry) throw new Error('Freighter no devolvió la firma de la autorización.');
+    return { signedAuthEntry: firmada.signedAuthEntry, signerAddress: firmada.signerAddress };
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Formatos
+// ---------------------------------------------------------------------------
+
+/** Montos del contrato (i128 en centavos) → "Bs 3.74". */
+export function formatearBs(centavos: bigint): string {
+  const negativo = centavos < BigInt(0);
+  const abs = negativo ? -centavos : centavos;
+  const enteros = abs / BigInt(100);
+  const decimales = (abs % BigInt(100)).toString().padStart(2, '0');
+  return `${negativo ? '-' : ''}Bs ${enteros}.${decimales}`;
+}
+
+/** "3.74" → 374n (centavos). Devuelve null si el texto no es un monto válido. */
+export function bsACentavos(texto: string): bigint | null {
+  const m = texto.trim().replace(',', '.').match(/^(\d+)(?:\.(\d{1,2}))?$/);
+  if (!m) return null;
+  return BigInt(m[1]) * BigInt(100) + BigInt((m[2] ?? '0').padEnd(2, '0'));
+}
+
+/** Timestamp del ledger (segundos UTC) → fecha y hora de Bolivia. */
+export function formatearFecha(segundos: bigint): string {
+  return new Date(Number(segundos) * 1000).toLocaleString('es-BO', { timeZone: 'America/La_Paz' });
+}
+
+/** 202610 → "10/2026". */
+export function formatearMes(anioMes: number): string {
+  const texto = String(anioMes);
+  return `${texto.slice(4)}/${texto.slice(0, 4)}`;
+}
+
+/** Mes actual en hora de Bolivia, formato AAAAMM (ej. 202610). */
+export function mesActual(): number {
+  const [mes, anio] = new Date()
+    .toLocaleDateString('es-BO', { timeZone: 'America/La_Paz', month: '2-digit', year: 'numeric' })
+    .split('/');
+  return Number(anio + mes);
 }
 
 // ---------------------------------------------------------------------------

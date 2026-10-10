@@ -41,6 +41,7 @@ export default function RootLayout({
             position: 'sticky',
             top: 0,
             height: '100vh',
+            overflowY: 'auto',
             boxSizing: 'border-box'
           }}>
             <h2 style={{ fontSize: '20px', fontWeight: 'bold', color: '#38bdf8', margin: '0 0 10px 0' }}>
@@ -70,6 +71,24 @@ export default function RootLayout({
               <Link href="/comprador-vehiculo/buscar" className="navLink">🔍 Buscar por Placa</Link>
               <Link href="/comprador-vehiculo/registrar" className="navLink">➕ Vincular</Link>
               <Link href="/comprador-vehiculo/actualizar" className="navLink">⚙️ Reasignar</Link>
+            </div>
+
+            {/* GRUPO: CARGAS DE GASOLINA */}
+            <div className="navGroup">
+              <span className="navCategoria">⛽ Cargas</span>
+              <Link href="/carga/registrar" className="navLink">⛽ Registrar</Link>
+              <Link href="/carga/buscar" className="navLink">🔍 Buscar</Link>
+              <Link href="/carga/historial" className="navLink">📜 Historial por Placa</Link>
+              <Link href="/carga/litros" className="navLink">📊 Litros por Mes</Link>
+            </div>
+
+            {/* GRUPO: ADMINISTRACIÓN DEL CONTRATO */}
+            <div className="navGroup">
+              <span className="navCategoria">🛠️ Administración</span>
+              <Link href="/resumen" className="navLink">📈 Resumen</Link>
+              <Link href="/admin/precio" className="navLink">💲 Precio</Link>
+              <Link href="/admin/limite" className="navLink">📏 Límite Mensual</Link>
+              <Link href="/admin/administrador" className="navLink">🛡️ Administrador</Link>
             </div>
 
             </nav>

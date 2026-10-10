@@ -129,3 +129,4 @@ If you want to use the new virtual store location, reinstall your dependencies w
 
 You may change the virtual store location by changing the value of the virtual-store-dir config
 ```
+
