@@ -313,3 +313,24 @@ stellar contract invoke \
 true
 
 ```
+
+## Binding del contrato
+
+Para generar los binding de TypeScript del contrato para un frontend en *react*, ejecutar el comando:
+
+```bash
+stellar contract bindings typescript \
+  --network testnet \
+  --contract-id $CONTRATO \
+  --output-dir ./target/packages/buy-jerrycan-gasoline \
+  --overwrite
+
+ℹ️ Network: Test SDF Network ; September 2015
+🌎 Downloading contract spec: CC7XIIG5OXBLTKKN455XNWV4IAR6FD6P2GW3VXJQQO5BVSXAVGXF5LHL
+⚠️ A new release of Stellar CLI is available: 27.1.0 -> 28.1.0
+ℹ️ Embedding contract address: CC7XIIG5OXBLTKKN455XNWV4IAR6FD6P2GW3VXJQQO5BVSXAVGXF5LHL
+✅ Generated!
+ℹ️ Run "npm install && npm run build" in "./target/packages/buy-jerrycan-gasoline" to build the JavaScript NPM package.
+```
+
+Una vez generado, copiar la carpeta al proyecto de frontend.
