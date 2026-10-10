@@ -33,8 +33,8 @@ export default function LitrosPorMes() {
   return (
     <PlantillaFormulario titulo="Litros Cargados por Mes" icono="📊" mensajeError={error}>
       <form onSubmit={manejarBusqueda} className="formGrid">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
-        <input type="month" value={mes} onChange={(e) => setMes(e.target.value)} required className="inputField" />
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Mes</span><input type="month" value={mes} onChange={(e) => setMes(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSearch">{cargando ? 'Consultando...' : 'Consultar'}</button>
       </form>
       {datos && (

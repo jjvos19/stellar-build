@@ -26,11 +26,11 @@ export default function RegistrarVehiculo() {
   return (
     <PlantillaFormulario titulo="Registrar Nuevo Vehículo" icono="🚗" mensajeExito={exito} mensajeError={error}>
       <form onSubmit={manejarRegistro} className="formGrid">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
-        <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} placeholder="Marca" required className="inputField" />
-        <input type="text" value={modelo} onChange={(e) => setModelo(e.target.value)} placeholder="Modelo" required className="inputField" />
-        <input type="number" value={anio} onChange={(e) => setAnio(e.target.value)} placeholder="Año" required className="inputField" />
-        <input type="text" value={color} onChange={(e) => setColor(e.target.value)} placeholder="Color" required className="inputField" />
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Marca</span><input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Modelo</span><input type="text" value={modelo} onChange={(e) => setModelo(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Año</span><input type="number" value={anio} onChange={(e) => setAnio(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Color</span><input type="text" value={color} onChange={(e) => setColor(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSubmit">{cargando ? 'Registrando...' : 'Guardar'}</button>
       </form>
     </PlantillaFormulario>

@@ -20,15 +20,18 @@ export default function ActualizarVehiculo() {
   };
 
   return (
-    <PlantillaFormulario titulo="Actualizar Estado de Vehículo" icono="⚙️" mensajeExito={exito} mensajeError={error}>
+    <PlantillaFormulario titulo="Cambiar Estado del Vehículo" icono="⚙️" mensajeExito={exito} mensajeError={error}>
       <form onSubmit={manejarActualizacion} className="formGrid">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
-        <select value={nuevoEstado} onChange={(e) => setNuevoEstado(e.target.value)} className="selectField">
-          <option value={StateVehicle.Valid}>Válido</option>
-          <option value={StateVehicle.Blocked}>Bloqueado</option>
-          <option value={StateVehicle.Stolen}>Robado</option>
-          <option value={StateVehicle.NotValid}>No válido (definitivo, no se puede revertir)</option>
-        </select>
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo">
+          <span>Nuevo estado</span>
+          <select value={nuevoEstado} onChange={(e) => setNuevoEstado(e.target.value)} className="selectField">
+            <option value={StateVehicle.Valid}>Válido</option>
+            <option value={StateVehicle.Blocked}>Bloqueado</option>
+            <option value={StateVehicle.Stolen}>Robado</option>
+            <option value={StateVehicle.NotValid}>No válido (definitivo, no se puede revertir)</option>
+          </select>
+        </label>
         <button type="submit" disabled={cargando} className="btnUpdate">{cargando ? 'Actualizando...' : 'Modificar Estado'}</button>
       </form>
     </PlantillaFormulario>

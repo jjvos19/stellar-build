@@ -71,12 +71,12 @@ export default function Administrador() {
   return (
     <PlantillaFormulario titulo="Administrador del Contrato" icono="🛡️" mensajeExito={exito} mensajeError={error}>
       <div className="resultadoBox">
-        <p style={{ wordBreak: 'break-all' }}><strong>Admin actual:</strong> {adminActual ?? '...'}</p>
+        <p><strong>Admin actual:</strong> <span className="valorLargo">{adminActual ?? '...'}</span></p>
       </div>
 
       {paso === 'inicio' && (
         <form onSubmit={prepararTransferencia} className="formGrid">
-          <input type="text" value={nuevoAdmin} onChange={(e) => setNuevoAdmin(e.target.value)} placeholder="Dirección del nuevo admin (G...)" required className="inputField" />
+          <label className="campo"><span>Dirección del nuevo admin</span><input type="text" value={nuevoAdmin} onChange={(e) => setNuevoAdmin(e.target.value)} placeholder="G..." required className="inputField" /></label>
           <button type="submit" disabled={cargando} className="btnUpdate">{cargando ? 'Preparando...' : '1. Preparar transferencia (admin actual)'}</button>
         </form>
       )}

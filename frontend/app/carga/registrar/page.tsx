@@ -34,9 +34,9 @@ export default function RegistrarCarga() {
   return (
     <PlantillaFormulario titulo="Registrar Carga de Gasolina" icono="⛽" mensajeExito={exito} mensajeError={error}>
       <form onSubmit={manejarRegistro} className="formGrid">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
-        <input type="text" value={ci} onChange={(e) => setCi(e.target.value)} placeholder="CI del comprador" required className="inputField" />
-        <input type="number" min="1" step="1" value={litros} onChange={(e) => setLitros(e.target.value)} placeholder="Litros" required className="inputField" />
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>CI del comprador</span><input type="text" value={ci} onChange={(e) => setCi(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Litros</span><input type="number" min="1" step="1" value={litros} onChange={(e) => setLitros(e.target.value)} required className="inputField" /></label>
         <div className="resultadoBox">
           <p><strong>Precio por litro:</strong> {precio !== null ? formatearBs(precio) : 'No definido'}</p>
           {precio !== null && litrosNumero > 0 && (

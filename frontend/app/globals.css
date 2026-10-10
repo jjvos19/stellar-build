@@ -1,133 +1,231 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   Sistema de diseño — futurista, con los colores de la bandera de Bolivia
+   Rojo (valor) · Amarillo (riqueza) · Verde (naturaleza)
+   ========================================================================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Bandera */
+  --bo-rojo: #e8283c;
+  --bo-amarillo: #f9d616;
+  --bo-verde: #1fbf6a;
+  --bo-rojo-glow: rgba(232, 40, 60, 0.35);
+  --bo-amarillo-glow: rgba(249, 214, 22, 0.30);
+  --bo-verde-glow: rgba(31, 191, 106, 0.35);
+  --franja: linear-gradient(90deg, var(--bo-rojo) 0 33.33%, var(--bo-amarillo) 33.33% 66.66%, var(--bo-verde) 66.66% 100%);
+
+  /* Superficies */
+  --fondo: #060a13;
+  --fondo-2: #0b1220;
+  --vidrio: rgba(148, 163, 184, 0.06);
+  --vidrio-fuerte: rgba(148, 163, 184, 0.10);
+  --borde: rgba(148, 163, 184, 0.14);
+  --borde-fuerte: rgba(148, 163, 184, 0.28);
+
+  /* Texto */
+  --texto: #e8edf6;
+  --texto-suave: #a3aec2;
+  --texto-tenue: #6b7891;
+
+  /* Formas y efectos */
+  --radio: 14px;
+  --radio-sm: 10px;
+  --sombra: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --transicion: 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  --foco: 0 0 0 3px rgba(249, 214, 22, 0.45);
+
+  --fuente-titulo: var(--font-titulo), system-ui, sans-serif;
+  --fuente-texto: var(--font-texto), system-ui, sans-serif;
+  --fuente-mono: var(--font-mono), ui-monospace, monospace;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--fondo);
+  --color-foreground: var(--texto);
+  --font-sans: var(--fuente-texto);
+  --font-mono: var(--fuente-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ------------------------------------------------------------------ Base */
+html { color-scheme: dark; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--fondo);
+  /* Resplandores de la bandera + retícula sutil */
+  background-image:
+    radial-gradient(900px 500px at 0% 0%, rgba(232, 40, 60, 0.10), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(249, 214, 22, 0.07), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%, rgba(31, 191, 106, 0.10), transparent 60%),
+    linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, auto, 44px 44px, 44px 44px;
+  background-attachment: fixed;
+  color: var(--texto);
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* SE ADICIONA */
+h1, h2, h3 { font-family: var(--fuente-titulo); letter-spacing: 0.01em; }
 
-/* app/vehiculo/vehiculo.css */
-.formContainer {
-  padding: 40px;
-  max-width: 600px;
-  margin: 0 auto;
-  font-family: system-ui, sans-serif;
+::selection { background: var(--bo-amarillo); color: #111; }
+
+:focus-visible { outline: none; box-shadow: var(--foco); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 
-.titulo {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: #fff;
-}
-
+/* ------------------------------------------------------------ Formularios */
 .formGrid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.inputField {
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #ffffff; /* Fondo blanco requerido */
-  color: #000000;            /* Texto negro */
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
+  gap: 16px;
 }
 
 .searchGroup {
   display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.searchGroup > .campo { flex: 1 1 200px; }
+
+/* Campo con etiqueta visible */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.campo > span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
 }
 
-.btnSubmit {
-  padding: 12px;
-  border-radius: 6px;
-  background-color: #16a34a;
-  color: #fff;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btnSearch {
-  padding: 12px 24px;
-  border-radius: 6px;
-  background-color: #0070f3;
-  color: #fff;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.alertExito {
-  padding: 16px;
-  background-color: #def7ec;
-  color: #03543f;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.alertError {
-  padding: 16px;
-  background-color: #fde8e8;
-  color: #9b1c1c;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.resultadoBox {
-  padding: 24px;
-  background-color: #1e293b;
-  border-radius: 8px;
-  color: #f8fafc;
-  margin-top: 20px;
-}
-
-
-/* Para actualizar */
+.inputField,
 .selectField {
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 16px;
   width: 100%;
   box-sizing: border-box;
+  padding: 12px 14px;
+  border-radius: var(--radio-sm);
+  border: 1px solid var(--borde-fuerte);
+  background-color: rgba(6, 10, 19, 0.65);
+  color: var(--texto);
+  font-family: var(--fuente-texto);
+  font-size: 15px;
+  transition: border-color var(--transicion), box-shadow var(--transicion), background-color var(--transicion);
 }
+.inputField::placeholder { color: var(--texto-tenue); }
+.inputField:hover, .selectField:hover { border-color: rgba(148, 163, 184, 0.45); }
+.inputField:focus, .selectField:focus {
+  outline: none;
+  border-color: var(--bo-amarillo);
+  box-shadow: var(--foco);
+  background-color: rgba(6, 10, 19, 0.9);
+}
+.selectField { appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--texto-suave) 50%), linear-gradient(135deg, var(--texto-suave) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+  background-size: 5px 5px; background-repeat: no-repeat; padding-right: 40px; }
+.selectField option { background: var(--fondo-2); color: var(--texto); }
+.inputField[type="month"]::-webkit-calendar-picker-indicator { filter: invert(0.8); cursor: pointer; }
 
+/* --------------------------------------------------------------- Botones */
+.btnSubmit,
+.btnSearch,
 .btnUpdate {
-  padding: 12px;
-  border-radius: 6px;
-  background-color: #d97706; /* Color ámbar/naranja para actualizar */
-  color: #fff;
-  border: none;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 12px 22px;
+  border-radius: var(--radio-sm);
+  border: 1px solid transparent;
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   cursor: pointer;
+  transition: transform var(--transicion), box-shadow var(--transicion), filter var(--transicion), background-color var(--transicion);
 }
+.btnSubmit:hover:not(:disabled),
+.btnSearch:hover:not(:disabled),
+.btnUpdate:hover:not(:disabled) { transform: translateY(-1px); }
+.btnSubmit:active:not(:disabled),
+.btnSearch:active:not(:disabled),
+.btnUpdate:active:not(:disabled) { transform: translateY(0); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Acción principal (registrar): verde */
+.btnSubmit {
+  background: linear-gradient(135deg, #24d47a, #12965a);
+  color: #04130b;
+  box-shadow: 0 6px 24px var(--bo-verde-glow);
+}
+.btnSubmit:hover:not(:disabled) { box-shadow: 0 8px 32px var(--bo-verde-glow); filter: brightness(1.05); }
+
+/* Modificar (actualizar): amarillo */
+.btnUpdate {
+  background: linear-gradient(135deg, #ffe14d, #e5b800);
+  color: #1a1400;
+  box-shadow: 0 6px 24px var(--bo-amarillo-glow);
+}
+.btnUpdate:hover:not(:disabled) { box-shadow: 0 8px 32px var(--bo-amarillo-glow); filter: brightness(1.05); }
+
+/* Consultar: vidrio con borde luminoso */
+.btnSearch {
+  background: var(--vidrio-fuerte);
+  color: var(--texto);
+  border-color: var(--borde-fuerte);
+}
+.btnSearch:hover:not(:disabled) { border-color: var(--bo-amarillo); box-shadow: 0 0 0 1px var(--bo-amarillo), 0 6px 24px rgba(249, 214, 22, 0.15); }
+
+/* ------------------------------------------------------------ Resultados */
+.resultadoBox {
+  margin-top: 4px;
+  padding: 6px 18px;
+  border-radius: var(--radio-sm);
+  border: 1px solid var(--borde);
+  background: rgba(6, 10, 19, 0.5);
+  color: var(--texto);
+}
+/* Cada <p><strong>Etiqueta:</strong> valor</p> se muestra como una fila de datos */
+.resultadoBox > p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--borde);
+}
+.resultadoBox > p:last-child { border-bottom: none; }
+.resultadoBox > p > strong { color: var(--texto-suave); font-weight: 500; }
+.resultadoBox > .formGrid { padding: 12px 0; }
+
+.valorLargo { font-family: var(--fuente-mono); font-size: 13px; word-break: break-all; }
+
+.nota { margin: 0; font-size: 14px; color: var(--texto-suave); }
+
+/* Tabla de datos (historial) */
+.tablaContenedor { overflow-x: auto; margin: 8px -18px 0; padding: 0 18px; }
+.tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tabla th {
+  text-align: left; padding: 10px 10px; white-space: nowrap;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-tenue);
+  border-bottom: 1px solid var(--borde-fuerte);
+}
+.tabla td { padding: 10px; border-bottom: 1px solid var(--borde); white-space: nowrap; }
+.tabla tbody tr { transition: background-color var(--transicion); }
+.tabla tbody tr:hover { background: var(--vidrio); }
+
+.paginacion { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; }
+.paginacion .btnSearch { min-height: 38px; padding: 8px 14px; font-size: 14px; }

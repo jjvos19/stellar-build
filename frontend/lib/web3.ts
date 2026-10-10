@@ -220,7 +220,8 @@ function traducirError(mensaje: string): string {
  * Úsalo en los catch: setError(mensajeDeError(err))
  */
 export function mensajeDeError(err: unknown): string {
-  console.error('[web3]', err);
+  // warn (no error): el error ya se muestra en pantalla; así no dispara el aviso de Next en desarrollo
+  console.warn('[web3]', err);
   const texto = err instanceof Error ? err.message : String(err);
   // Errores del contrato que llegan como texto: "Error(Contract, #6)"
   const codigo = texto.match(/Error\(Contract, #(\d+)\)/)?.[1];

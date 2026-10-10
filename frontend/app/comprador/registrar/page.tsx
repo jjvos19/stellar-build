@@ -28,10 +28,10 @@ export default function RegistrarComprador() {
   return (
     <PlantillaFormulario titulo="Registrar Comprador" icono="👤" mensajeExito={exito} mensajeError={error}>
       <form onSubmit={manejarRegistro} className="formGrid">
-        <input type="text" value={nombres} onChange={(e) => setNombres(e.target.value)} placeholder="Nombres" required className="inputField" />
-        <input type="text" value={apellidos} onChange={(e) => setApellidos(e.target.value)} placeholder="Apellidos" required className="inputField" />
-        <input type="text" value={ci} onChange={(e) => setCi(e.target.value)} placeholder="CI" required className="inputField" />
-        <input type="tel" inputMode="numeric" value={telefono} onChange={(e) => setTelefono(e.target.value)} placeholder="Teléfono" required className="inputField" />
+        <label className="campo"><span>Nombres</span><input type="text" value={nombres} onChange={(e) => setNombres(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Apellidos</span><input type="text" value={apellidos} onChange={(e) => setApellidos(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>CI</span><input type="text" value={ci} onChange={(e) => setCi(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Teléfono</span><input type="tel" inputMode="numeric" value={telefono} onChange={(e) => setTelefono(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSubmit">{cargando ? 'Registrando...' : 'Guardar'}</button>
       </form>
     </PlantillaFormulario>

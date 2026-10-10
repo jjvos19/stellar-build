@@ -25,8 +25,8 @@ export default function BuscarCompradorVehiculo() {
   return (
     <PlantillaFormulario titulo="Buscar Comprador de un Vehículo" icono="🔍" mensajeError={error}>
       <form onSubmit={manejarBusqueda} className="searchGroup">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
-        <input type="text" value={ci} onChange={(e) => setCi(e.target.value)} placeholder="CI" required className="inputField" />
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>CI</span><input type="text" value={ci} onChange={(e) => setCi(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSearch">{cargando ? 'Buscando...' : 'Consultar'}</button>
       </form>
       {datos && (

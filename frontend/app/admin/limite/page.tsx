@@ -35,7 +35,7 @@ export default function LimiteMensual() {
         <p><strong>Límite vigente por vehículo:</strong> {limiteActual === null ? '...' : limiteActual === 0 ? 'Sin límite' : `${limiteActual} L por mes`}</p>
       </div>
       <form onSubmit={manejarActualizacion} className="formGrid">
-        <input type="number" min="0" step="1" value={nuevoLimite} onChange={(e) => setNuevoLimite(e.target.value)} placeholder="Nuevo límite en litros (0 = sin límite)" required className="inputField" />
+        <label className="campo"><span>Nuevo límite en litros</span><input type="number" min="0" step="1" value={nuevoLimite} onChange={(e) => setNuevoLimite(e.target.value)} placeholder="0 = sin límite" required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnUpdate">{cargando ? 'Actualizando...' : 'Cambiar Límite'}</button>
       </form>
     </PlantillaFormulario>

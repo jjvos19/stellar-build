@@ -37,7 +37,7 @@ export default function PrecioGasolina() {
         <p><strong>Precio vigente por litro:</strong> {precioActual !== null ? formatearBs(precioActual) : 'Aún no definido'}</p>
       </div>
       <form onSubmit={manejarActualizacion} className="formGrid">
-        <input type="text" inputMode="decimal" value={nuevoPrecio} onChange={(e) => setNuevoPrecio(e.target.value)} placeholder="Nuevo precio por litro en Bs (ej. 3.74)" required className="inputField" />
+        <label className="campo"><span>Nuevo precio por litro en Bs</span><input type="text" inputMode="decimal" value={nuevoPrecio} onChange={(e) => setNuevoPrecio(e.target.value)} placeholder="ej. 3.74" required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnUpdate">{cargando ? 'Actualizando...' : 'Cambiar Precio'}</button>
       </form>
     </PlantillaFormulario>
