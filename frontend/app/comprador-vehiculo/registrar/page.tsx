@@ -20,10 +20,10 @@ export default function RegistrarCompradorVehiculo() {
   };
 
   return (
-    <PlantillaFormulario titulo="Vincular Cliente a Vehículo" icono="🔗" mensajeExito={exito} mensajeError={error}>
+    <PlantillaFormulario titulo="Vincular Comprador a Vehículo" icono="🔗" mensajeExito={exito} mensajeError={error}>
       <form onSubmit={manejarRegistro} className="formGrid">
-        <input type="text" value={ci} onChange={(e) => setCi(e.target.value)} placeholder="CI" required className="inputField" />
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" required className="inputField" />
+        <label className="campo"><span>CI</span><input type="text" value={ci} onChange={(e) => setCi(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSubmit">{cargando ? 'Vinculando...' : 'Guardar'}</button>
       </form>
     </PlantillaFormulario>

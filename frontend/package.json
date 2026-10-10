@@ -11,6 +11,7 @@
   "dependencies": {
     "@stellar/freighter-api": "^6.0.1",
     "buy-jerrycan-gasoline": "link:..\\libs-react\\stellar\\packages\\buy-jerrycan-gasoline",
+    "lucide-react": "^1.54.0",
     "next": "16.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"

@@ -45,8 +45,8 @@ export default function ResumenContrato() {
           <p><strong>Cargas registradas:</strong> {resumen.cargas.toString()}</p>
           <p><strong>Precio por litro:</strong> {resumen.precio !== null ? formatearBs(resumen.precio) : 'Aún no definido'}</p>
           <p><strong>Límite mensual:</strong> {resumen.limite === 0 ? 'Sin límite' : `${resumen.limite} L por vehículo`}</p>
-          <p style={{ wordBreak: 'break-all' }}><strong>Admin:</strong> {resumen.admin}</p>
-          <p style={{ wordBreak: 'break-all' }}><strong>Contrato ({NOMBRE_RED}):</strong> {CONTRATO_ID}</p>
+          <p><strong>Admin:</strong> <span className="valorLargo">{resumen.admin}</span></p>
+          <p><strong>Contrato ({NOMBRE_RED}):</strong> <span className="valorLargo">{CONTRATO_ID}</span></p>
         </div>
       )}
       <button type="button" onClick={consultar} disabled={cargando} className="btnSearch">{cargando ? 'Actualizando...' : 'Actualizar'}</button>

@@ -30,28 +30,31 @@ export default function ActualizarComprador() {
   };
 
   return (
-    <PlantillaFormulario titulo="Actualizar Comprador" icono="⚙️" mensajeError={mensajeError}>
-      <div className="searchGroup">
-        <input
-          type="text"
-          value={ci}
-          onChange={(e) => setCi(e.target.value)}
-          placeholder="Ingrese el CI a buscar"
-          className="inputField"
-        />
-        <button type="button" onClick={consultarComprador} disabled={cargandoConsulta} className="btnSearch">
+    <PlantillaFormulario titulo="Ficha del Comprador" icono="⚙️" mensajeError={mensajeError}>
+      <form className="searchGroup" onSubmit={(e) => { e.preventDefault(); consultarComprador(); }}>
+        <label className="campo">
+          <span>CI</span>
+          <input
+            type="text"
+            value={ci}
+            onChange={(e) => setCi(e.target.value)}
+            required
+            className="inputField"
+          />
+        </label>
+        <button type="submit" disabled={cargandoConsulta} className="btnSearch">
           {cargandoConsulta ? 'Buscando...' : 'Ver Datos'}
         </button>
-      </div>
+      </form>
 
       {comprador && (
         <div className="formGrid">
-          <div style={{ padding: '12px', backgroundColor: '#1e293b', borderRadius: '6px', marginBottom: '10px', color: '#f8fafc' }}>
-            <p style={{ margin: '0 0 6px 0' }}><strong>Nombres:</strong> {comprador.names}</p>
-            <p style={{ margin: '0 0 6px 0' }}><strong>Apellidos:</strong> {comprador.last_names}</p>
-            <p style={{ margin: 0 }}><strong>Teléfono:</strong> {comprador.phonenumber.toString()}</p>
+          <div className="resultadoBox">
+            <p><strong>Nombres:</strong> {comprador.names}</p>
+            <p><strong>Apellidos:</strong> {comprador.last_names}</p>
+            <p><strong>Teléfono:</strong> {comprador.phonenumber.toString()}</p>
           </div>
-          <p style={{ margin: 0, color: '#94a3b8' }}>
+          <p className="nota">
             El contrato actual no permite modificar los datos de un comprador.
           </p>
         </div>

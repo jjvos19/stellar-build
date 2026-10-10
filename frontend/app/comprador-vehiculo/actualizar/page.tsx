@@ -67,26 +67,32 @@ export default function ActualizarCompradorVehiculo() {
 
   return (
     <PlantillaFormulario titulo="Estado del Comprador en un Vehículo" icono="⚙️" mensajeExito={mensajeExito} mensajeError={mensajeError}>
-      <div className="searchGroup">
-        <input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} placeholder="Placa" className="inputField" />
-        <input type="text" value={ci} onChange={(e) => setCi(e.target.value)} placeholder="CI del comprador" className="inputField" />
-        <button type="button" onClick={consultarVinculacion} disabled={cargandoConsulta} className="btnSearch">
+      <form className="searchGroup" onSubmit={(e) => { e.preventDefault(); consultarVinculacion(); }}>
+        <label className="campo"><span>Placa</span><input type="text" value={placa} onChange={(e) => setPlaca(e.target.value)} required className="inputField" /></label>
+        <label className="campo"><span>CI del comprador</span><input type="text" value={ci} onChange={(e) => setCi(e.target.value)} required className="inputField" /></label>
+        <button type="submit" disabled={cargandoConsulta} className="btnSearch">
           {cargandoConsulta ? 'Buscando...' : 'Ver Asignación'}
         </button>
-      </div>
+      </form>
 
       {comprador && estadoActual !== null && (
         <form onSubmit={manejarActualizacion} className="formGrid">
-          <div style={{ padding: '12px', backgroundColor: '#1e293b', borderRadius: '6px', marginBottom: '10px', color: '#f8fafc' }}>
-            <p style={{ margin: '0 0 6px 0' }}><strong>Comprador:</strong> {comprador.names} {comprador.last_names}</p>
-            <p style={{ margin: 0 }}><strong>Estado actual:</strong> {NOMBRE_ESTADO_COMPRADOR[estadoActual] ?? estadoActual}</p>
+          <div className="resultadoBox">
+            <p><strong>Comprador:</strong> {comprador.names} {comprador.last_names}</p>
+            <p><strong>Estado actual:</strong> {NOMBRE_ESTADO_COMPRADOR[estadoActual] ?? estadoActual}</p>
           </div>
 
-          <select value={nuevoEstado} onChange={(e) => setNuevoEstado(e.target.value)} className="selectField">
-            <option value={StateBuyer.Valid}>Válido</option>
-            <option value={StateBuyer.Blocked}>Bloqueado</option>
-            <option value={StateBuyer.NoValid}>No válido (definitivo, no se puede revertir)</option>
-          </select>
+          <label className="campo">
+            <span>Nuevo estado</span>
+            <select value={nuevoEstado} onChange={(e) => setNuevoEstado(e.target.value)} className="selectField">
+              <option value={StateBuyer.Valid}>Válido</option>
+              <option value={StateBuyer.Blocked}>Bloqueado</option>
+              <option value={StateBuyer.NoValid}>No válido (definitivo, no se puede revertir)</option>
+            </select>
+          </label>
+          {estadoActual === StateBuyer.NoValid && (
+            <p className="nota">Este comprador está en estado No válido para la placa y ya no puede cambiar.</p>
+          )}
 
           <button type="submit" disabled={cargando || estadoActual === StateBuyer.NoValid} className="btnUpdate">
             {cargando ? 'Actualizando...' : 'Cambiar Estado'}

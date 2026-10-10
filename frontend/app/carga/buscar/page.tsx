@@ -23,7 +23,7 @@ export default function BuscarCarga() {
   return (
     <PlantillaFormulario titulo="Buscar Carga" icono="🔍" mensajeError={error}>
       <form onSubmit={manejarBusqueda} className="searchGroup">
-        <input type="number" min="1" value={id} onChange={(e) => setId(e.target.value)} placeholder="N° de carga" required className="inputField" />
+        <label className="campo"><span>N° de carga</span><input type="number" min="1" value={id} onChange={(e) => setId(e.target.value)} required className="inputField" /></label>
         <button type="submit" disabled={cargando} className="btnSearch">{cargando ? 'Buscando...' : 'Buscar'}</button>
       </form>
       {carga && (
